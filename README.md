@@ -8,7 +8,7 @@ To use the script, simply include it in the <head> section of your website:
 
 ```html
 <head>
-    <script src="shabbat-observance.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/liad07/shabat-kodesh@main/main.js"></script>
 </head>
 ```
 The script will automatically run every minute to check whether it is currently Shabbat. If it is, the message will be displayed, and the user will be unable to access the website until Shabbat has ended.
