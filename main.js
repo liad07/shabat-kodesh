@@ -16,7 +16,7 @@ async function checkShabbat() {
         const chabatOut = new Date(items[2].date)
 
         // if after chabat in and before chabatend overite body with html chabat message
-        if (true || Date.now() >= chabatIn.getTime() && Date.now() < chabatOut.getTime()) {
+        if ( Date.now() >= chabatIn.getTime() && Date.now() < chabatOut.getTime()) {
             document.querySelector("body").innerHTML = `
             <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%; height: 100vh; ">
             <img src="https://parashat.co.il/wp-content/uploads/2021/01/17.png" alt="shabat shalom">
