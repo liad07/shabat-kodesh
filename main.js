@@ -20,7 +20,7 @@ async function checkShabbat() {
             document.querySelector("body").innerHTML = `
             <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%; height: 100vh; ">
             <img src="https://parashat.co.il/wp-content/uploads/2021/01/17.png" alt="shabat shalom">
-            <p  style="margin-top:10px; font-size: 30px;" >האתר אינו פעיל בשבת נשמח לחזור לשרותכם מצואי שבת </p>
+            <p  style="margin-top:10px; font-size: 30px;" >האתר אינו פעיל בשבת נשמח לחזור לשרותכם במוצאי שבת </p>
             <p  style="margin-top:10px; font-size: 30px;" >צאת השבת : ${getTimeString(chabatOut)} </p>
             </div>
          `
