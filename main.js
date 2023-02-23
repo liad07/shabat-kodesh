@@ -1,38 +1,33 @@
-async function checkShabbat() {
-    const response = await fetch('https://ipapi.co/json/');
-    const data = await response.json();
-
-    fetch('https://www.hebcal.com/shabbat?cfg=i2&city=' + data.city + '&b=18&M=on&lg=he-x-NoNikud&tgt=_top')
-        .then(response => response.text())
-        .then(data => {
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(data, 'text/html');
-            const firstStrong = doc.querySelectorAll('strong');
-
-            let cnisahour = firstStrong[0].textContent.split(":")[0];
-            const cnisaminute = firstStrong[0].textContent.split(":")[1];
-
-            const outhour = firstStrong[1].textContent.split(":")[0];
-            const outminute = firstStrong[1].textContent.split(":")[1];
-
-            const now = new Date();
-            let currentHour = now.getHours();
-            const currentMinute = now.getMinutes();
-            const day = now.getDay();
-
-            if (currentHour < cnisahour || (currentHour === cnisahour && cnisaminute < currentMinute && day === 5)) {
-                // Shabbat has not started yet
-            } else {
-                if (currentHour > outhour || (currentHour === outhour && currentMinute >= outminute && day === 6)) {
-                    // Shabbat has ended
-                } else {
-                    // Shabbat is currently in progress
-                    const message = "יהודי יקר,\n\nהאתר בו הנך מבקר שומר שבת וחג, ולכן הגלישה בו אינה מתאפשרת בזמן זה.\n\n'כִּי אֶשְׁמְרָה שַׁבָּת אֵל יִשְׁמְרֵנִי אוֹת הִיא לְעוֹלְמֵי עַד בֵּינוֹ וּבֵינִי'  \n";
-                    const centerTag = "<center><b>" + message + "</b></center>";
-                    document.write(centerTag);
-                }
-            }
-        });
+function getTimeString(date) {
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    const timeString = `${hours}:${minutes}`;
+    return timeString;
 }
 
-setInterval(checkShabbat, 60000); // run every minute
+async function checkShabbat() {
+    try {
+        const Ipapi_resp = await fetch('https://ipapi.co/json/');
+        const clienInfo = await Ipapi_resp.json();
+        const hebcal_resp = await fetch(`https://www.hebcal.com/shabbat?cfg=json&city=${clienInfo.region}&b=40&M=on`)
+        const chabatInfo = await hebcal_resp.json();
+        const { items } = chabatInfo;
+        const chabatIn = new Date(items[0].date)
+        const chabatOut = new Date(items[2].date)
+
+        // if after chabatin and before chabatout overite body with html chabat message
+        if ( Date.now() >= chabatIn.getTime() && Date.now() < chabatOut.getTime()) {
+            document.querySelector("body").innerHTML = `
+            <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%; height: 100vh; ">
+            <img src="https://parashat.co.il/wp-content/uploads/2021/01/17.png" alt="shabat shalom">
+            <p  style="margin-top:10px; font-size: 30px;" >האתר אינו פעיל בשבת נשמח לחזור לשרותכם מצואי שבת </p>
+            <p  style="margin-top:10px; font-size: 30px;" >צאת השבת : ${getTimeString(chabatOut)} </p>
+            </div>
+         `
+        }
+    } catch (error) {
+        throw error;
+    }
+
+}
+checkShabbat();
