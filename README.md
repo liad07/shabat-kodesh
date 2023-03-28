@@ -27,7 +27,7 @@ If you have suggestions for how to improve this script, please open an issue or 
 
 # C# Version
 ## Usage
-The api class now in file on thie git called api.cs pls include in same directory
+The api class now in file on this git called api.cs pls include in same directory
   
 To use the script, simply include it in your C# ASP.NET project:
 ```csharp
