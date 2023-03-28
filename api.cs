@@ -15,8 +15,6 @@ namespace shabatkodesh
 
         public async Task<string>  GetContent(string url)
     {
-            await Task.Delay(3000);
-
             var client = new HttpClient();
         var response = await client.GetAsync(url) ;
         var content = await response.Content.ReadAsStringAsync();
