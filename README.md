@@ -27,9 +27,9 @@ If you have suggestions for how to improve this script, please open an issue or 
 
 # C# Version
 ## Usage
-
-To use the script, simply include it in your C# ASP.NET project:
 The api class now in file on thie git called api.cs pls include in same directory
+  
+To use the script, simply include it in your C# ASP.NET project:
 ```csharp
         protected async void Page_Load(object sender, EventArgs e)
         {
