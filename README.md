@@ -13,7 +13,7 @@ To use the script, simply include it in the <head> section of your website:
 </head>
 ```
 
-The script will automatically run every minute to check whether it is currently Shabbat. If it is, a message will be displayed in Hebrew to inform the user that the website is inaccessible during this time. The message includes a Jewish proverb: 'כִּי אֶשְׁמְרָה שַׁבָּת אֵל יִשְׁמְרֵנִי אוֹת הִיא לְעוֹלְמֵי עַד בֵּינוֹ וּבֵינִי'.
+The script will automatically run every minute to check whether it is currently Shabbat. If it is, a message will be displayed in Hebrew to inform the user that the website is inaccessible during this time.
 
 ## Dependencies
 
